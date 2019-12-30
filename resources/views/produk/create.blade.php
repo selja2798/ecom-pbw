@@ -4,7 +4,7 @@
 @section('content')
     <div class="card card-default">
         <div class="card-header">
-        <h3 class="d-inline-block">{{isset($produk) ? 'Edit Produk' : 'Buat Produk'}}</h3>
+            <h3 class="d-inline-block">{{isset($produk) ? 'Edit Produk' : 'Buat Produk'}}</h3>
         </div>
         <div class="card-body">
             @include('partials.error')
@@ -16,17 +16,17 @@
 
                 <div class="form-group">
                     <label for="name">Nama Produk</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{isset($produk) ? $produk->name : ''}}">
+                    <input type="text" id="name" name="name" class="form-control" value="{{old('name', isset($produk) ? $produk->name : '')}}">
                 </div>
 
                 <div class="form-group">
                     <label for="harga">Harga</label>
-                    <input type="number" id="harga" name="harga" class="form-control" value="{{isset($produk) ? $produk->harga : ''}}">
+                    <input type="number" id="harga" name="harga" class="form-control" value="{{old('harga', isset($produk) ? $produk->harga : '')}}">
                 </div>
 
                 <div class="form-group">
                     <label for="stok">Stok</label>
-                    <input type="number" id="stok" name="stok" class="form-control" value="{{isset($produk) ? $produk->stok : ''}}">
+                    <input type="number" id="stok" name="stok" class="form-control" value="{{old('stok', isset($produk) ? $produk->stok : '')}}">
                 </div>
 
                 <div class="form-group">
@@ -34,8 +34,8 @@
                     <select name="kategori" id="kategori" class="form-control">
                         @foreach ($categories as $kategori)
                             <option value="{{$kategori->id}}"
-                                @if (isset($post))
-                                    @if ($kategori->id === $post->kategori_id)
+                                @if (isset($produk))
+                                    @if ($kategori->id === $produk->kategori_id)
                                         selected
                                     @endif
                                 @endif
@@ -47,12 +47,6 @@
                 </div>
 
                 <button type="submit" class="btn btn-md btn-success">{{isset($produk) ? 'Edit Produk' : 'Buat Produk'}}</button>
-
-                {{-- <div class="form-group">
-                    <label for="kategori">Kategori</label>
-                    <input type="text" id="kategori" name="kategori" class="form-control">
-                </div> --}}
-
             </form>
         </div>
     </div>

@@ -3,29 +3,31 @@
 @section('content')
     <div class="card card-default">
         <div class="card-header">
-            <h3 class="d-inline-block">Kategori</h3>
-                <a href="{{route('kategori.create')}}" class="btn btn-md btn-success float-right">Create Kategori</a>
+            <h3 class="d-inline-block">Consumer</h3>
+                <a href="{{route('consumer.create')}}" class="btn btn-md btn-success float-right">Create Consumer</a>
         </div>
         <div class="card-body">
-            @if ($categories->count() > 0)
+            @if ($consumers->count() > 0)
                 <table class="table table-hover">
                     <thead class="thead-light">
                         <tr>
-                            <th>Nama Kategori</th>
-                            <th>Produk</th>
+                            <th>Nama Consumer</th>
+                            <th>Alamat</th>
+                            {{-- <th>Order</th> --}}
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $kategori)
+                        @foreach ($consumers as $consumer)
                             <tr>
-                                <td>{{$kategori->name}}</td>
-                                <td>{{$kategori->produks->count()}}</td>
+                                <td>{{$consumer->nama_konsumer}}</td>
+                                <td>{{$consumer->alamat}}</td>
+                                {{-- <td>{{$consumer->alamat}}</td> --}}
                                 <td></td>
                                 <td>
-                                <a href="{{route('kategori.edit', $kategori->id)}}" class="btn btn-sm btn-secondary">Edit</a>
-                                <button onclick="deleteHandler({{$kategori->id}})" class="btn btn-sm btn-secondary">Delete</button>
+                                <a href="{{route('consumer.edit', $consumer->id)}}" class="btn btn-sm btn-secondary">Edit</a>
+                                <button onclick="deleteHandler({{$consumer->id}})" class="btn btn-sm btn-secondary">Delete</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -33,18 +35,18 @@
                 </table>
             @else
                 <h3 class="text-center">
-                    Belum ada kategori.
+                    Belum ada consumer.
                 </h3>
             @endif
 
-        <form action="" method="POST" id="deleteKategoriForm">
+        <form action="" method="POST" id="deleteConsumerForm">
             @csrf
             @method("DELETE")
             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Hapus Kategori</h5>
+                    <h5 class="modal-title" id="deleteModalLabel">Hapus Consumer</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -70,10 +72,10 @@
 @section('scripts')
    <script>
         function deleteHandler(id){
-            const form = document.querySelector('#deleteKategoriForm');
+            const form = document.querySelector('#deleteConsumerForm');
             const modalBody = document.querySelector('#modal-body');
-            form.action = '/kategori/' + id;
-            $('#deleteModalLabel').html('Hapus kategori?');
+            form.action = '/consumer/' + id;
+            $('#deleteModalLabel').html('Hapus consumer?');
             $('#deleteModal').modal('show');
     }
    </script>

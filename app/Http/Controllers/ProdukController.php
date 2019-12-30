@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\KategoriRequest;
 use App\Http\Requests\ProdukRequest;
+use App\Http\Requests\ProdukUpdateRequest;
 use App\Kategori;
 use App\Produk;
 use Illuminate\Http\Request;
@@ -81,9 +82,13 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(KategoriRequest $request, Produk $produk)
+    public function update(ProdukUpdateRequest $request, Produk $produk)
     {
         $data = $request->only('name', 'harga', 'stok', 'kategori_id');
+
+        if ($request->kategori) {
+            $produk->kategori()->associate($request->kategori);
+        }
 
         $produk->update($data);
 

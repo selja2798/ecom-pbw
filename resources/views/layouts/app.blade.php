@@ -98,7 +98,7 @@
                                 <a href="{{route('kategori.index')}}">Kategori</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="">Consumer</a>
+                                    <a href="{{route('consumer.index')}}">Consumer</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="">Laporan</a>

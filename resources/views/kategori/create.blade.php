@@ -4,13 +4,12 @@
 @section('content')
     <div class="card card-default">
         <div class="card-header">
-            <h3 class="d-inline-block">Buat Kategori</h3>
+        <h3 class="d-inline-block">{{isset($kategori) ? 'Ubah Kategori' : 'Buat Kategori'}}</h3>
         </div>
         <div class="card-body">
             @include('partials.error')
             <form action="{{isset($kategori) ? route('kategori.update', $kategori->id) : route('kategori.store')}}" method="POST">
                 @csrf
-
                 @if (isset($kategori))
                     @method('PUT')
                 @endif

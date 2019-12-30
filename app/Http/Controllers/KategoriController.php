@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\KategoriRequest;
+use App\Http\Requests\KategoriUpdateRequest;
 use App\Kategori;
 use Illuminate\Http\Request;
 
@@ -74,7 +75,7 @@ class KategoriController extends Controller
      * @param  \App\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function update(KategoriRequest $request, Kategori $kategori)
+    public function update(KategoriUpdateRequest $request, Kategori $kategori)
     {
         $data = $request->only('name');
 
@@ -93,6 +94,13 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
+
+        if ($kategori->produks->count() > 0) {
+            session()->flash('error', 'Kategori gagal terhapus karena ada produk yang yg termasuk dalam kategori ini.');
+
+            return back();
+        }
+
         $kategori->delete();
 
         session()->flash('success', 'Kategori telah berhasil di hapus');

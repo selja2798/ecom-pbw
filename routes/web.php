@@ -22,3 +22,4 @@ Route::get('produk/delete-all', 'ProdukController@destroyAll')->name('produk.del
 
 Route::resource('produk', 'ProdukController');
 Route::resource('kategori', 'KategoriController');
+Route::resource('consumer', 'ConsumerController');
