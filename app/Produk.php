@@ -13,13 +13,13 @@ class Produk extends Model
     protected $fillable = [
         'name',
         'harga',
+        'kategori_id',
         'stok'
     ];
 
-    // 'kategori_id',
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
 
-    // public function kategori()
-    // {
-    //     return $this->belongsTo(Kategori::class);
-    // }
 }

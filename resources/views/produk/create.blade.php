@@ -29,6 +29,23 @@
                     <input type="number" id="stok" name="stok" class="form-control" value="{{isset($produk) ? $produk->stok : ''}}">
                 </div>
 
+                <div class="form-group">
+                    <label for="kategori">Kategori</label>
+                    <select name="kategori" id="kategori" class="form-control">
+                        @foreach ($categories as $kategori)
+                            <option value="{{$kategori->id}}"
+                                @if (isset($post))
+                                    @if ($kategori->id === $post->kategori_id)
+                                        selected
+                                    @endif
+                                @endif
+                                >
+                                {{$kategori->name}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-md btn-success">{{isset($produk) ? 'Edit Produk' : 'Buat Produk'}}</button>
 
                 {{-- <div class="form-group">

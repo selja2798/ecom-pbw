@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\KategoriRequest;
 use App\Http\Requests\ProdukRequest;
+use App\Kategori;
 use App\Produk;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        return view('produk.create');
+        return view('produk.create')->with('categories', Kategori::all());
     }
 
     /**
@@ -42,7 +43,8 @@ class ProdukController extends Controller
         Produk::create([
             'name' => $request->name,
             'harga' => $request->harga,
-            'stok' => $request->stok
+            'stok' => $request->stok,
+            'kategori_id' => $request->kategori
         ]);
 
         session()->flash('success', 'Produk sukses dibuat.');
@@ -69,7 +71,7 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        return view('produk.create')->withProduk($produk);
+        return view('produk.create')->withProduk($produk)->with('categories', Kategori::all());
     }
 
     /**
@@ -81,7 +83,7 @@ class ProdukController extends Controller
      */
     public function update(KategoriRequest $request, Produk $produk)
     {
-        $data = $request->only('name', 'harga', 'stok');
+        $data = $request->only('name', 'harga', 'stok', 'kategori_id');
 
         $produk->update($data);
 

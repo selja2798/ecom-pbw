@@ -14,7 +14,7 @@
                 <thead class="thead-light">
                     <tr>
                         <th>Nama Produk</th>
-                        {{-- <th>Kategori</th> --}}
+                        <th>Kategori</th>
                         <th>Harga</th>
                         <th>Stok</th>
                         <th></th>
@@ -25,6 +25,7 @@
                     @foreach ($produks as $produk)
                         <tr>
                             <td>{{$produk->name}}</td>
+                            <td>{{$produk->kategori->name}}</td>
                             <td>{{$produk->harga}}</td>
                             <td>{{$produk->stok}}</td>
                             <td></td>

@@ -22,7 +22,7 @@
                         @foreach ($categories as $kategori)
                             <tr>
                                 <td>{{$kategori->name}}</td>
-                                <td>2</td>
+                                <td>{{$kategori->produks->count()}}</td>
                                 <td></td>
                                 <td>
                                 <a href="{{route('kategori.edit', $kategori->id)}}" class="btn btn-sm btn-secondary">Edit</a>
