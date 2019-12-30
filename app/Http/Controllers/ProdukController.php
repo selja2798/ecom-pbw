@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\KategoriRequest;
 use App\Http\Requests\ProdukRequest;
 use App\Produk;
 use Illuminate\Http\Request;
@@ -66,9 +67,9 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Produk $produk)
     {
-        //
+        return view('produk.create')->withProduk($produk);
     }
 
     /**
@@ -78,9 +79,15 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(KategoriRequest $request, Produk $produk)
     {
-        //
+        $data = $request->only('name', 'harga', 'stok');
+
+        $produk->update($data);
+
+        session()->flash('success', 'Produk telah berhasil di update');
+
+        return redirect(route('produk.index'));
     }
 
     /**
@@ -89,8 +96,21 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Produk $produk)
     {
-        //
+        $produk->delete();
+
+        session()->flash('success', 'Produk telah berhasil di hapus');
+
+        return back();
+    }
+
+    public function destroyAll()
+    {
+        Produk::query()->delete();
+
+        session()->flash('success', 'Semua produk telah berhasil di hapus');
+
+        return back();
     }
 }

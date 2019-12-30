@@ -9,8 +9,8 @@ class Kategori extends Model
     protected $fillable = ['name'];
 
 
-    public function produks()
-    {
-        $this->hasMany(Produk::class);
-    }
+    // public function produks()
+    // {
+    //     $this->hasMany(Produk::class);
+    // }
 }

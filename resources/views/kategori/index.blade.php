@@ -6,33 +6,30 @@
         <div class="col-md-12">
             <div class="card card-default">
                 <div class="card-header">
-                    <h3 class="d-inline-block">Produk</h3>
+                    <h3 class="d-inline-block">Kategori</h3>
                         <button class="btn btn-md btn-danger float-right ml-2" onclick="DeleteAllHandler()">Delete All</button>
-                        <a href="{{route('produk.create')}}" class="btn btn-md btn-success float-right">Create produk</a>
+                        <a href="{{route('kategori.create')}}" class="btn btn-md btn-success float-right">Create Kategori</a>
                 </div>
                 <div class="card-body">
-                    @if ($produks->count() > 0)
+                    @if ($categories->count() > 0)
                     <table class="table table-hover">
                         <thead class="thead-light">
                             <tr>
-                                <th>Nama Produk</th>
-                                {{-- <th>Kategori</th> --}}
-                                <th>Harga</th>
-                                <th>Stok</th>
+                                <th>Nama Kategori</th>
+                                <th>Produk</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($produks as $produk)
+                            @foreach ($categories as $kategori)
                                 <tr>
-                                    <td>{{$produk->name}}</td>
-                                    <td>{{$produk->harga}}</td>
-                                    <td>{{$produk->stok}}</td>
+                                    <td>{{$kategori->name}}</td>
+                                    <td>2</td>
                                     <td></td>
                                     <td>
-                                    <a href="{{route('produk.edit', $produk->id)}}" class="btn btn-sm btn-secondary">Edit</a>
-                                    <button onclick="deleteHandler({{$produk->id}})" class="btn btn-sm btn-secondary">Delete</button>
+                                    <a href="{{route('kategori.edit', $kategori->id)}}" class="btn btn-sm btn-secondary">Edit</a>
+                                    <button onclick="deleteHandler({{$kategori->id}})" class="btn btn-sm btn-secondary">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -40,18 +37,18 @@
                     </table>
                     @else
                     <h3 class="text-center">
-                        Belum ada produk.
+                        Belum ada kategori.
                     </h3>
                 @endif
 
-                <form action="" method="POST" id="deleteProdukForm">
+                <form action="" method="POST" id="deleteKategoriForm">
                     @csrf
                     @method("DELETE")
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalLabel">Hapus Produk</h5>
+                            <h5 class="modal-title" id="deleteModalLabel">Hapus Kategori</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -80,19 +77,19 @@
 @section('scripts')
    <script>
         function deleteHandler(id){
-            const form = document.querySelector('#deleteProdukForm');
+            const form = document.querySelector('#deleteKategoriForm');
             const modalBody = document.querySelector('#modal-body');
-            form.action = '/produk/' + id;
-            $('#deleteModalLabel').html('Hapus produk?');
+            form.action = '/kategori/' + id;
+            $('#deleteModalLabel').html('Hapus kategori?');
             $('#deleteModal').modal('show');
     }
 
      function DeleteAllHandler(){
-            const form = document.querySelector('#deleteProdukForm');
+            const form = document.querySelector('#deleteKategoriForm');
             const modalBody = document.querySelector('#modal-body');
-            form.action = '{{route('produk.deleteAll')}}';
+            form.action = 'kategori/delete-all';
             form.method= 'DELETE'
-            $('#deleteModalLabel').html('Hapus semua produk?');
+            $('#deleteModalLabel').html('Hapus semua kategori?');
             $('#deleteModal').modal('show');
     }
    </script>

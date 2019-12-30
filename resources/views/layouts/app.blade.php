@@ -74,17 +74,30 @@
 
         <main class="py-4">
             <div class="container">
+                @if (session()->has('success'))
+                        <div class="alert alert-success notif">
+                            {{session()->get('success')}}
+                            <button class="btn btn-light btn-sm float-right notif">X</button>
+                        </div>
+                    @endif
+                @if (session()->has('error'))
+                        <div class="alert alert-danger notif">
+                            {{session()->get('error')}}
+                            <button class="btn btn-light btn-sm float-right notif">X</button>
+                        </div>
+                @endif
+            @auth
                 <div class="row">
                     <div class="col-md-2">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <a href="">Order</a>
+                                <a href="{{route('produk.index')}}">Order</a>
                             </li>
                             <li class="list-group-item">
                             <a href="{{route('produk.index')}}">Produk</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="">Kategori</a>
+                            <a href="{{route('kategori.index')}}">Kategori</a>
                             </li>
                             <li class="list-group-item">
                                 <a href="">Consumer</a>
@@ -94,6 +107,7 @@
                             </li>
                         </ul>
                     </div>
+            @endauth
                     <div class="col-md-10">
                         @yield('content')
                     </div>
@@ -101,5 +115,14 @@
             </div>
         </main>
     </div>
+
+
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        $("button").click(function () {
+            $(this).parents('.notif').hide();
+        });
+    </script>
+    @yield('scripts')
 </body>
 </html>

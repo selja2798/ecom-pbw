@@ -18,5 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('produk/delete-all', 'ProdukController@destroyAll')->name('produk.deleteAll');
 
 Route::resource('produk', 'ProdukController');
+Route::resource('kategori', 'KategoriController');
