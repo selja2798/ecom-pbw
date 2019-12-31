@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ConsumerRequest;
+use App\Http\Requests\consumer\ConsumerCreateRequest;
 use App\Consumer;
-use App\Http\Requests\ConsumerUpdateRequest;
+use App\Http\Requests\consumer\ConsumerRequest;
+use App\Http\Requests\consumer\ConsumerUpdateRequest;
 
 class ConsumerController extends Controller
 {
@@ -34,7 +35,7 @@ class ConsumerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ConsumerRequest $request)
+    public function store(ConsumerCreateRequest $request)
     {
         Consumer::create([
             'nama_konsumer' => $request->nama_konsumer,
@@ -95,11 +96,11 @@ class ConsumerController extends Controller
     public function destroy(Consumer $consumer)
     {
 
-        if ($consumer->produks->count() > 0) {
-            session()->flash('error', 'Consumer gagal terhapus karena ada produk yang yg termasuk Consumer ini.');
+        // if ($consumer->produks->count() > 0) {
+        //     session()->flash('error', 'Consumer gagal terhapus karena ada produk yang yg termasuk Consumer ini.');
 
-            return back();
-        }
+        //     return back();
+        // }
 
         $consumer->delete();
 

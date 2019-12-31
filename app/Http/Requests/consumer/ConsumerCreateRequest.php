@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\consumer;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ConsumerUpdateRequest extends FormRequest
+class ConsumerCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class ConsumerUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama_konsumer' => 'unique:consumers,nama_konsumer,'.$this->consumer->id
+            'nama_konsumer' => 'required|unique:consumers',
+            'alamat' => 'required'
         ];
     }
 }

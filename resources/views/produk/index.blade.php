@@ -26,7 +26,7 @@
                         <tr>
                             <td>{{$produk->name}}</td>
                             <td>{{$produk->kategori->name}}</td>
-                            <td>{{$produk->harga}}</td>
+                            <td>Rp. {{$produk->harga}}</td>
                             <td>{{$produk->stok}}</td>
                             <td></td>
                             <td>

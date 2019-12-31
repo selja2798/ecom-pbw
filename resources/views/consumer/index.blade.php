@@ -19,11 +19,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
                         @foreach ($consumers as $consumer)
-                            <tr>
                                 <td>{{$consumer->nama_konsumer}}</td>
                                 <td>{{$consumer->alamat}}</td>
-                                {{-- <td>{{$consumer->alamat}}</td> --}}
                                 <td></td>
                                 <td>
                                 <a href="{{route('consumer.edit', $consumer->id)}}" class="btn btn-sm btn-secondary">Edit</a>
