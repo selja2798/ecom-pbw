@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -24,4 +20,12 @@ Route::resource('produk', 'ProdukController');
 Route::resource('kategori', 'KategoriController');
 Route::resource('consumer', 'ConsumerController');
 
-Route::get('users/{id}', );
+Route::get('/', 'OrderController@create')->name('halaman-utama');
+
+Route::post('order', 'OrderController@store')->name('order.store');
+
+
+
+//TODO: create order index
+
+//TODO : include produk and kategori
