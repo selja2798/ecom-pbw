@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\KategoriRequest;
+use App\Http\Requests\KategoriUpdateRequest;
 use App\Kategori;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
+        return view('kategori.index')->with('categories', Kategori::all());
     }
 
     /**
@@ -24,7 +26,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('kategori.create');
     }
 
     /**
@@ -33,9 +35,15 @@ class KategoriController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KategoriRequest $request)
     {
-        //
+        Kategori::create([
+            'name' => $request->name
+        ]);
+
+        session()->flash('success', 'Kategori telah berhasil di buat');
+
+        return redirect(route('kategori.index'));
     }
 
     /**
@@ -57,7 +65,7 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        //
+        return view('kategori.create')->withKategori($kategori);
     }
 
     /**
@@ -67,9 +75,15 @@ class KategoriController extends Controller
      * @param  \App\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kategori $kategori)
+    public function update(KategoriUpdateRequest $request, Kategori $kategori)
     {
-        //
+        $data = $request->only('name');
+
+        $kategori->update($data);
+
+        session()->flash('success', 'Kategori telah berhasil di rubah');
+
+        return redirect(route('kategori.index'));
     }
 
     /**
@@ -80,6 +94,17 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        //
+
+        if ($kategori->produks->count() > 0) {
+            session()->flash('error', 'Kategori gagal terhapus karena ada produk yang yg termasuk dalam kategori ini.');
+
+            return back();
+        }
+
+        $kategori->delete();
+
+        session()->flash('success', 'Kategori telah berhasil di hapus');
+
+        return redirect(route('kategori.index'));
     }
 }

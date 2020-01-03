@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProdukRequest;
+use App\Http\Requests\ProdukUpdateRequest;
+use App\Kategori;
 use App\Produk;
-use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
@@ -27,7 +28,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        return view('produk.create');
+        return view('produk.create')->with('categories', Kategori::all());
     }
 
     /**
@@ -41,7 +42,8 @@ class ProdukController extends Controller
         Produk::create([
             'name' => $request->name,
             'harga' => $request->harga,
-            'stok' => $request->stok
+            'stok' => $request->stok,
+            'kategori_id' => $request->kategori
         ]);
 
         session()->flash('success', 'Produk sukses dibuat.');
@@ -66,9 +68,9 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Produk $produk)
     {
-        //
+        return view('produk.create')->withProduk($produk)->with('categories', Kategori::all());
     }
 
     /**
@@ -78,9 +80,19 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProdukUpdateRequest $request, Produk $produk)
     {
-        //
+        $data = $request->only('name', 'harga', 'stok', 'kategori_id');
+
+        if ($request->kategori) {
+            $produk->kategori()->associate($request->kategori);
+        }
+
+        $produk->update($data);
+
+        session()->flash('success', 'Produk telah berhasil di update');
+
+        return redirect(route('produk.index'));
     }
 
     /**
@@ -89,8 +101,28 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Produk $produk)
     {
-        //
+        if ($produk->orders->count() > 0) {
+            session()->flash('error', 'Produk gagal terhapus karena ada produk yang yg masih di proses.');
+
+            return back();
+        }
+
+
+        $produk->delete();
+
+        session()->flash('success', 'Produk telah berhasil di hapus');
+
+        return back();
+    }
+
+    public function destroyAll()
+    {
+        Produk::query()->delete();
+
+        session()->flash('success', 'Semua produk telah berhasil di hapus');
+
+        return back();
     }
 }
