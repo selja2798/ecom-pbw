@@ -13,7 +13,7 @@
                         <tr>
                             <th>Nama Consumer</th>
                             <th>Alamat</th>
-                            {{-- <th>Order</th> --}}
+                            <th>Order</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -23,6 +23,7 @@
                         @foreach ($consumers as $consumer)
                                 <td>{{$consumer->nama_konsumer}}</td>
                                 <td>{{$consumer->alamat}}</td>
+                                <td>{{$consumer->orders->count()}}</td>
                                 <td></td>
                                 <td>
                                 <a href="{{route('consumer.edit', $consumer->id)}}" class="btn btn-sm btn-secondary">Edit</a>

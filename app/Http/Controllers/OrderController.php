@@ -17,7 +17,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('order.create');
+        return view('order.index')->with('orders', Order::all());
     }
 
     /**
@@ -38,14 +38,17 @@ class OrderController extends Controller
      */
     public function store(OrderRequest $request)
     {
+        $produk = Produk::find($request->produk);
         Order::create([
             'qty' => $request->qty,
-            'consumer_id' => $request->consumer
+            'consumer_id' => $request->consumer,
+            'produk_id' => $request->produk,
+            'total_harga' => $request->qty * $produk->harga
         ]);
 
         session()->flash('success', 'Order berhasil tersimpan.');
 
-        return redirect(route('consumer.index'));
+        return redirect(route('order.index'));
     }
 
     /**asd
@@ -56,7 +59,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        
     }
 
     /**
@@ -67,7 +70,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+
     }
 
     /**
@@ -79,7 +82,15 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $status_orderToInt = (int)$request->status_order;
+
+        $order->status_order = $status_orderToInt;
+
+        $order->save();
+
+        session()->flash('success', 'Order berhasil dirubah.');
+
+        return back();
     }
 
     /**

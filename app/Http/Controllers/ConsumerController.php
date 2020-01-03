@@ -96,11 +96,11 @@ class ConsumerController extends Controller
     public function destroy(Consumer $consumer)
     {
 
-        // if ($consumer->produks->count() > 0) {
-        //     session()->flash('error', 'Consumer gagal terhapus karena ada produk yang yg termasuk Consumer ini.');
+        if ($consumer->orders->count() > 0) {
+            session()->flash('error', 'Costumer gagal terhapus karena masih di proses.');
 
-        //     return back();
-        // }
+            return back();
+        }
 
         $consumer->delete();
 

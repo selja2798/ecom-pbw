@@ -17,7 +17,7 @@ class CreateProduksTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('kategori_id');
-            $table->decimal('harga');
+            $table->decimal('harga', 12, 2);
             $table->integer('stok');
             $table->timestamps();
         });

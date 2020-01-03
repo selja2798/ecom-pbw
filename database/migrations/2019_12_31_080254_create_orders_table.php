@@ -16,9 +16,10 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('qty');
-            $table->integer('total_harga')->nullable();
+            $table->decimal('total_harga', 12, 2);
             $table->integer('consumer_id');
-            $table->string('status_order')->nullable()->default('unpaid');
+            $table->integer('produk_id');
+            $table->integer('status_order')->default('2');
             $table->timestamps();
         });
     }

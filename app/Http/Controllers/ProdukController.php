@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\KategoriRequest;
 use App\Http\Requests\ProdukRequest;
 use App\Http\Requests\ProdukUpdateRequest;
 use App\Kategori;
 use App\Produk;
-use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
@@ -105,6 +103,13 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
+        if ($produk->orders->count() > 0) {
+            session()->flash('error', 'Produk gagal terhapus karena ada produk yang yg masih di proses.');
+
+            return back();
+        }
+
+
         $produk->delete();
 
         session()->flash('success', 'Produk telah berhasil di hapus');

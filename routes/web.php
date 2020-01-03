@@ -19,13 +19,17 @@ Route::get('produk/delete-all', 'ProdukController@destroyAll')->name('produk.del
 Route::resource('produk', 'ProdukController');
 Route::resource('kategori', 'KategoriController');
 Route::resource('consumer', 'ConsumerController');
+Route::resource('order', 'OrderController');
 
 Route::get('/', 'OrderController@create')->name('halaman-utama');
+Route::get('laporan', function ()
+{
+    return view('laporan.index');
+})->name('laporan');
 
-Route::post('order', 'OrderController@store')->name('order.store');
 
 
 
-//TODO: create order index
+//TODO: order by/sort by
 
-//TODO : include produk and kategori
+//TODO: buat laporan

@@ -20,4 +20,8 @@ class Produk extends Model
         return $this->belongsTo(Kategori::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

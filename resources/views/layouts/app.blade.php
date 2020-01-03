@@ -93,7 +93,7 @@
                         <div class="col-md-2">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <a href="{{route('produk.index')}}">Order</a>
+                                    <a href="{{route('order.index')}}">Order</a>
                                 </li>
                                 <li class="list-group-item">
                                 <a href="{{route('produk.index')}}">Produk</a>
@@ -105,7 +105,7 @@
                                     <a href="{{route('consumer.index')}}">Consumer</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="">Laporan</a>
+                                <a href="{{route('laporan', 2)}}">Laporan</a>
                                 </li>
                             </ul>
                         </div>

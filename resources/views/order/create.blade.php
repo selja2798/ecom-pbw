@@ -83,16 +83,16 @@
                             <form action="{{route('order.store')}}" method="POST">
                                 @csrf
                                 @include('partials.error')
-                                {{-- <div class="form-group">
+                                <div class="form-group">
                                     <label for="produk">Pilih Produk</label>
                                     <select class="form-control" name="produk" id="produk">
                                         @foreach ($produks as $produk)
                                             <option value="{{$produk->id}}">
-                                                {{$produk->name}} - {{$produk->harga}}
+                                                {{$produk->name}} - @rupiah($produk->harga)
                                             </option>
                                         @endforeach
                                     </select>
-                                </div> --}}
+                                </div>
                                 <div class="form-group">
                                     <label for="consumer">Pilih Consumer</label>
                                     <select class="form-control" name="consumer" id="consumer">
