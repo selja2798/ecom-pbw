@@ -22,10 +22,6 @@ Route::resource('consumer', 'ConsumerController');
 Route::resource('order', 'OrderController');
 
 Route::get('/', 'OrderController@create')->name('halaman-utama');
-Route::get('laporan', function ()
-{
-    return view('laporan.index');
-})->name('laporan');
 
 
 
