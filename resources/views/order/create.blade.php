@@ -80,6 +80,12 @@
                             <h1 class="text-center">E-commerce Pak Budi</h1>
                            </div>
                            <div class="card-body">
+                            @if (session()->has('success'))
+                                <div class="alert alert-success notif">
+                                    {{session()->get('success')}}
+                                    <button class="btn btn-light btn-sm float-right notif">X</button>
+                                </div>
+                            @endif
                             <form action="{{route('order.store')}}" method="POST">
                                 @csrf
                                 @include('partials.error')
@@ -112,14 +118,6 @@
                                         </div>
                                         <input type="number" name="qty" class="form-control col-md-2">
                                 </div>
-
-                                @if (session()->has('success'))
-                                    <div class="alert alert-success notif">
-                                        {{session()->get('success')}}
-                                        <button class="btn btn-light btn-sm float-right notif">X</button>
-                                    </div>
-                                @endif
-
                                 <div class="d-flex justify-content-center">
                                     <input type="submit" class="btn btn-primary mt-2"  value="Proses">
                                 </div>
@@ -131,5 +129,11 @@
                 </div>
             </div>
         </div>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script>
+            $("button").click(function () {
+                $(this).parents('.notif').hide();
+            });
+        </script>
     </body>
 </html>

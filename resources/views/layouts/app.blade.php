@@ -76,15 +76,15 @@
 
         <main class="py-4">
             <div class="container">
-                @if (session()->has('success'))
+                @if (session('success'))
                         <div class="alert alert-success notif">
-                            {{session()->get('success')}}
+                            {{session('success')}}
                             <button class="btn btn-light btn-sm float-right notif">X</button>
                         </div>
                     @endif
-                @if (session()->has('error'))
+                @if (session('error'))
                         <div class="alert alert-danger notif">
-                            {{session()->get('error')}}
+                            {{session('error')}}
                             <button class="btn btn-light btn-sm float-right notif">X</button>
                         </div>
                 @endif
@@ -105,7 +105,7 @@
                                     <a href="{{route('consumer.index')}}">Consumer</a>
                                 </li>
                                 <li class="list-group-item">
-                                <a href="{{route('laporan', 2)}}">Laporan</a>
+                                <a href="">Laporan</a>
                                 </li>
                             </ul>
                         </div>

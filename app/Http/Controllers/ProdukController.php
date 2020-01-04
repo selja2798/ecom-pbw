@@ -9,8 +9,6 @@ use App\Produk;
 
 class ProdukController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      *
@@ -70,7 +68,9 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        return view('produk.create')->withProduk($produk)->with('categories', Kategori::all());
+        return view('produk.create')
+                ->withProduk($produk)
+                ->with('categories', Kategori::all());
     }
 
     /**
@@ -104,6 +104,7 @@ class ProdukController extends Controller
     public function destroy(Produk $produk)
     {
         if ($produk->orders->count() > 0) {
+
             session()->flash('error', 'Produk gagal terhapus karena ada produk yang yg masih di proses.');
 
             return back();

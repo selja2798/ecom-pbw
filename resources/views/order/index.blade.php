@@ -3,7 +3,7 @@
 @section('content')
     <div class="card card-default">
         <div class="card-header">
-            <h3 class="d-inline-block">Order</h3>
+            <h3 class="d-inline">Order</h3>
         </div>
         <div class="card-body">
             @if ($orders->count() > 0)
@@ -12,9 +12,9 @@
                         <tr>
                             <th>Consumer</th>
                             <th>Produk</th>
-                            <th>Kategori</th>
                             <th>Qty</th>
                             <th>Total harga</th>
+                            <th>Tanggal Order</th>
                             <th>Status Order</th>
                             <th></th>
                         </tr>
@@ -24,14 +24,15 @@
                             <tr>
                                 <td>{{$order->consumers->nama_konsumer}}</td>
                                 <td>{{$order->produks->name}}</td>
-                                <td>{{$order->produks->kategori->name}}</td>
                                 <td>{{$order->qty}}</td>
                                 <td>@rupiah($order->total_harga)</td>
+                                <td>{{$order->created_at->format('d-m-Y')}}</td>
                                 <td>
                                     <form action="{{route('order.update', $order->id)}}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <select name="status_order" id="status_order">
+
+                                        <select class="form-control d-inline-block" style="width: 100px" name="status_order" id="status_order">
                                             <option value="3"
                                                 @if ($order->status_order == 3)
                                                     selected
@@ -54,7 +55,7 @@
                                             </option>
 
                                             <option value="0"
-                                            @if ($order->status_order == 0)
+                                                @if ($order->status_order == 0)
                                                     selected
                                                 @endif>
                                                 Cancel
@@ -68,6 +69,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{$orders->links()}}
             @else
                 <h3 class="text-center">
                     Belum ada order.
