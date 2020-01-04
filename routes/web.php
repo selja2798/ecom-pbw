@@ -29,7 +29,6 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
-//TODO: if paid admin cant change satus order again
 
 //TODO: order by/sort by
 

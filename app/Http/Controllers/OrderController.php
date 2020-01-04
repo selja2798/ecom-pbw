@@ -44,9 +44,14 @@ class OrderController extends Controller
         if ($request->status_order > 0) {
             if ($request->status_order == 3) {
                 $produk = Produk::find($order->produk_id);
-                $produk->stok = $produk->stok - (int)$order->qty;
 
-                $produk->save();
+                if ($produk->stok >= $order->qty) {
+                    $produk->stok = $produk->stok - (int)$order->qty;
+                    $produk->save();
+                }else{
+                    session()->flash('error', 'Stok produk sudah habis');
+                    return back();
+                }
             }
 
             $status_orderToInt = (int)$request->status_order;

@@ -31,7 +31,6 @@
                                     <form action="{{route('order.update', $order->id)}}" method="POST">
                                         @csrf
                                         @method('PUT')
-
                                         <select class="form-control d-inline-block" style="width: 100px" name="status_order" id="status_order">
                                             <option value="3"
                                                 @if ($order->status_order == 3)
@@ -78,15 +77,3 @@
         </div>
     </div>
 @endsection
-
-{{-- @section('scripts')
-   <script>
-        function deleteHandler(id){
-            const form = document.querySelector('#deleteOrderForm');
-            const modalBody = document.querySelector('#modal-body');
-            form.action = '/order/' + id;
-            $('#deleteModalLabel').html('Hapus order?');
-            $('#deleteModal').modal('show');
-    }
-   </script> --}}
-{{-- @endsection --}}
