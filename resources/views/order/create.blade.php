@@ -94,7 +94,7 @@
                                     <select class="form-control" name="produk" id="produk">
                                         @foreach ($produks as $produk)
                                             <option value="{{$produk->id}}">
-                                                {{$produk->name}} - @rupiah($produk->harga)
+                                                {{$produk->name}} - @rupiah($produk->harga) stok: {{$produk->stok}}
                                             </option>
                                         @endforeach
                                     </select>

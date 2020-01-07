@@ -7,13 +7,27 @@ use App\Order;
 use App\Produk;
 use App\Http\Requests\OrderRequest;
 use App\Http\Requests\OrderUpdateRequest;
-use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
     public function index() {
-        $produk = Order::paginate(5);
-        return view('order.index')->with('orders', $produk);
+        if (request()->has('status_order')) {
+            $orders = Order::where('status_order', request('status_order'))
+                                ->paginate(5)
+                                ->appends( 'status_order', request('status_order'));
+        }
+        elseif (request()->has('produk')) {
+           $orders = Order::where('produk_id', request('produk'))
+                                ->paginate(5)
+                                ->appends( 'produk', request('produk'));
+        }
+        else{
+            $orders = Order::paginate(5);
+        }
+
+        return view('order.index')->with('orders', $orders)->with('produks', Produk::all());
     }
 
 
@@ -66,5 +80,18 @@ class OrderController extends Controller
             session()->flash('success', 'Order berhasil terhapus.');
         }
         return back();
+    }
+
+    public function pdf() {
+        $orders= Order::where('status_order', 3)
+                ->whereBetween('updated_at', [
+                    Carbon::now()->startOfMonth(),
+                    Carbon::now()->endOfMonth()
+                ])
+                ->orderBy('created_at', 'asc')
+                ->get();
+
+        $pdf = PDF::loadView('laporan.pdf', compact('orders'));
+        return $pdf->stream('laporan-ecomm.pdf');
     }
 }

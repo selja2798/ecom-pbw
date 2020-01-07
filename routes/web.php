@@ -26,12 +26,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('order', 'OrderController@index')->name('order.index');
     Route::put('order/{order}', 'OrderController@update')->name('order.update');
     Route::post('order', 'OrderController@store')->name('order.store');
+
+    Route::get('pdf', 'OrderController@pdf')->name('laporan-order.pfd');
 });
 
 
 
 //TODO: order by/sort by
-
-//TODO: buat laporan
 
 //TODO: refactor controller

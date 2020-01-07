@@ -105,7 +105,7 @@
                                     <a href="{{route('consumer.index')}}">Consumer</a>
                                 </li>
                                 <li class="list-group-item">
-                                <a href="">Laporan</a>
+                                <a href="{{route('laporan-order.pfd')}}">Laporan</a>
                                 </li>
                             </ul>
                         </div>
