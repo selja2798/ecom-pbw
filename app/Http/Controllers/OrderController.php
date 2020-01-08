@@ -23,11 +23,19 @@ class OrderController extends Controller
                                 ->paginate(5)
                                 ->appends( 'produk', request('produk'));
         }
+        elseif (request()->has('consumer')){
+            $orders = Order::where('consumer_id', request('consumer'))
+                                ->paginate(5)
+                                ->appends( 'consumer', request('consumer'));
+        }
         else{
             $orders = Order::paginate(5);
         }
 
-        return view('order.index')->with('orders', $orders)->with('produks', Produk::all());
+        return view('order.index')
+                ->with('orders', $orders)
+                ->with('produks', Produk::all())
+                ->with('consumers', Consumer::all());
     }
 
 
@@ -63,7 +71,7 @@ class OrderController extends Controller
                     $produk->stok = $produk->stok - (int)$order->qty;
                     $produk->save();
                 }else{
-                    session()->flash('error', 'Stok produk sudah habis');
+                    session()->flash('error', 'Stok produk kurang.');
                     return back();
                 }
             }

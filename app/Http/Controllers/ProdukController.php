@@ -110,19 +110,9 @@ class ProdukController extends Controller
             return back();
         }
 
-
         $produk->delete();
 
         session()->flash('success', 'Produk telah berhasil di hapus');
-
-        return back();
-    }
-
-    public function destroyAll()
-    {
-        Produk::query()->delete();
-
-        session()->flash('success', 'Semua produk telah berhasil di hapus');
 
         return back();
     }

@@ -5,7 +5,6 @@
     <div class="card card-default">
         <div class="card-header">
             <h3 class="d-inline-block">Produk</h3>
-                <button class="btn btn-md btn-danger float-right ml-2" onclick="DeleteAllHandler()">Delete All</button>
                 <a href="{{route('produk.create')}}" class="btn btn-md btn-success float-right">Create produk</a>
         </div>
         <div class="card-body">
@@ -81,15 +80,6 @@
             const modalBody = document.querySelector('#modal-body');
             form.action = '/produk/' + id;
             $('#deleteModalLabel').html('Hapus produk?');
-            $('#deleteModal').modal('show');
-    }
-
-     function DeleteAllHandler(){
-            const form = document.querySelector('#deleteProdukForm');
-            const modalBody = document.querySelector('#modal-body');
-            form.action = '{{route('produk.deleteAll')}}';
-            form.method= 'DELETE'
-            $('#deleteModalLabel').html('Hapus semua produk?');
             $('#deleteModal').modal('show');
     }
    </script>

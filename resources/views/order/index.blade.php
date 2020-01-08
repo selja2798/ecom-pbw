@@ -28,7 +28,18 @@
                     @endforeach
                 </div>
             </div>
-            <span class="float-right mr-2">Filter:</span>
+            <div class="dropdown show float-right" >
+                <a class="btn btn-sm btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Consumer
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    @foreach ($consumers as $consumer)
+                        <a class="dropdown-item" href="?consumer={{$consumer->id}}">{{$consumer->nama_konsumer}}</a>
+                    @endforeach
+                </div>
+            </div>
+            <div class="float-right mr-2">Filter:</div>
         </div>
         <div class="card-body">
             @if ($orders->count() > 0)
@@ -104,3 +115,4 @@
         </div>
     </div>
 @endsection
+
