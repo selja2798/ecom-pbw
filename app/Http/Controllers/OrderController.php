@@ -38,13 +38,11 @@ class OrderController extends Controller
                 ->with('consumers', Consumer::all());
     }
 
-
     public function create() {
         return view('order.create')
                 ->with('consumers', Consumer::all())
                 ->with('produks', Produk::all());
     }
-
 
     public function store(OrderRequest $request) {
         $produk = Produk::find($request->produk);
@@ -96,7 +94,7 @@ class OrderController extends Controller
                     Carbon::now()->startOfMonth(),
                     Carbon::now()->endOfMonth()
                 ])
-                ->orderBy('created_at', 'asc')
+                ->orderBy('updated_at', 'asc')
                 ->get();
 
         $pdf = PDF::loadView('laporan.pdf', compact('orders'));
