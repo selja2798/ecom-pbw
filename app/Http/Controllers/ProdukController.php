@@ -104,7 +104,6 @@ class ProdukController extends Controller
     public function destroy(Produk $produk)
     {
         if ($produk->orders->count() > 0) {
-
             session()->flash('error', 'Produk gagal terhapus karena ada produk yang yg masih di proses.');
 
             return back();
