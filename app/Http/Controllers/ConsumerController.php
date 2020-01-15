@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\consumer\ConsumerCreateRequest;
 use App\Consumer;
-use App\Http\Requests\consumer\ConsumerRequest;
 use App\Http\Requests\consumer\ConsumerUpdateRequest;
 
 class ConsumerController extends Controller

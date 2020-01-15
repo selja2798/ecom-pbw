@@ -59,7 +59,7 @@
                     <tbody>
                         @foreach ($orders as $index => $order)
                             <tr>
-                                <td>{{ $orders->firstItem() + $index }}</td>
+                                <td>{{$orders->firstItem() + $index}}</td>
                                 <td>{{$order->consumers->nama_konsumer}}</td>
                                 <td>{{$order->produks->name}}</td>
                                 <td>{{$order->qty}}</td>

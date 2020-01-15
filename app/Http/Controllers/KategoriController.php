@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\KategoriRequest;
-use App\Http\Requests\KategoriUpdateRequest;
+use App\Http\Requests\kategori\KategoriRequest;
+use App\Http\Requests\kategori\KategoriUpdateRequest;
 use App\Kategori;
 use Illuminate\Http\Request;
 

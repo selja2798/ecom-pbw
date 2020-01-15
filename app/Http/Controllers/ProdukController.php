@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProdukRequest;
-use App\Http\Requests\ProdukUpdateRequest;
+use App\Http\Requests\produk\ProdukRequest;
+use App\Http\Requests\produk\ProdukUpdateRequest;
 use App\Kategori;
 use App\Produk;
 

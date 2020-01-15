@@ -122,7 +122,6 @@
                                     <input type="submit" class="btn btn-primary mt-2"  value="Proses">
                                 </div>
                             </form>
-
                            </div>
                        </div>
                     </div>

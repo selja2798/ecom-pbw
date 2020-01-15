@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\produk;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrderUpdateRequest extends FormRequest
+class ProdukUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class OrderUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'name' => 'unique:produks,name,'.$this->produk->id
         ];
     }
 }

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Consumer;
 use App\Order;
 use App\Produk;
-use App\Http\Requests\OrderRequest;
-use App\Http\Requests\OrderUpdateRequest;
+use App\Http\Requests\order\OrderRequest;
+use App\Http\Requests\order\OrderUpdateRequest;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 
@@ -15,21 +15,24 @@ class OrderController extends Controller
     public function index() {
         if (request()->has('status_order')) {
             $orders = Order::where('status_order', request('status_order'))
+                                ->orderBy('status_order', 'asc')
                                 ->paginate(5)
                                 ->appends( 'status_order', request('status_order'));
         }
         elseif (request()->has('produk')) {
            $orders = Order::where('produk_id', request('produk'))
+                                ->orderBy('status_order', 'asc')
                                 ->paginate(5)
                                 ->appends( 'produk', request('produk'));
         }
         elseif (request()->has('consumer')){
             $orders = Order::where('consumer_id', request('consumer'))
+                                ->orderBy('status_order', 'asc')
                                 ->paginate(5)
                                 ->appends( 'consumer', request('consumer'));
         }
         else{
-            $orders = Order::paginate(5);
+            $orders = Order::orderBy('status_order', 'asc')->paginate(5);
         }
 
         return view('order.index')
@@ -85,6 +88,7 @@ class OrderController extends Controller
 
             session()->flash('success', 'Order berhasil terhapus.');
         }
+
         return back();
     }
 

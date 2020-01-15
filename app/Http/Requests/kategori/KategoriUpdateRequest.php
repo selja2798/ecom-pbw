@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\kategori;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrderRequest extends FormRequest
+class KategoriUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'qty' => 'required|gt:0|not_in:0'
+            'name' => 'unique:kategoris'
         ];
     }
 }

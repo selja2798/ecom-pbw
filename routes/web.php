@@ -24,13 +24,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('order', 'OrderController@index')->name('order.index');
     Route::put('order/{order}', 'OrderController@update')->name('order.update');
+    Route::post('order', 'OrderController@store')->name('order.store');
 
     Route::get('pdf', 'OrderController@pdf')->name('laporan-order.pfd');
 });
 
-Route::post('order', 'OrderController@store')->name('order.store');
 
 
 //TODO: filter
 
-//TODO: refactor controller
